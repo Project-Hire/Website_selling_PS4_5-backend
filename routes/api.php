@@ -20,8 +20,13 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/re_register', [AuthController::class, 're_register']);
+
     Route::get('email/verify/{id}',[VerificationController::class,'verify'])->name('verification.verify');
     Route::post('email/verify_OTP',[VerificationController::class,'verify_OTP']);
     Route::post('email/logout_OTP',[VerificationController::class,'logout_OTP']);
