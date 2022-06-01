@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdvertisementController;
 use \App\Http\Controllers\VerificationController;
 
 /*
@@ -27,9 +28,16 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/re_register', [AuthController::class, 're_register']);
 
-    Route::get('email/verify/{id}',[VerificationController::class,'verify'])->name('verification.verify');
     Route::post('email/verify_OTP',[VerificationController::class,'verify_OTP']);
     Route::post('email/logout_OTP',[VerificationController::class,'logout_OTP']);
 });
 
-
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'advertise'
+], function ($router) {
+    Route::get('/', [AdvertisementController::class, 'index']);
+    Route::post('/store', [AdvertisementController::class, 'store']);
+    Route::post('/delete/{id}', [AdvertisementController::class, 'delete']);
+    Route::post('/update', [AdvertisementController::class, 'update']);
+});
