@@ -15,6 +15,12 @@ class CreateEvaluationAccessoryTable extends Migration
     {
         Schema::create('evaluation_accessory', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('comment', 2000);
+            $table->integer('stars');
+            $table->bigInteger('accessory_id')->unsigned()->index();
+            $table->foreign('accessory_id')->references('id')->on('accessory')->onDelete('cascade');
             $table->timestamps();
         });
     }

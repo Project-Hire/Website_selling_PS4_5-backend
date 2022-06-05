@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('gender');
             $table->string('birth');
             $table->string('number_phone');
+            $table->boolean('role');
             $table->string('address');
             $table->string('email')->unique()->default(NULL);
             $table->boolean('confirm');

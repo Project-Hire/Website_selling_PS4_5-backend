@@ -15,6 +15,12 @@ class CreateEvaluationGiftcardTable extends Migration
     {
         Schema::create('evaluation_giftcard', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->unsigned()->index();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('comment', 2000);
+            $table->integer('stars');
+            $table->bigInteger('gift_card_id')->unsigned()->index();
+            $table->foreign('gift_card_id')->references('id')->on('gift_card')->onDelete('cascade');
             $table->timestamps();
         });
     }

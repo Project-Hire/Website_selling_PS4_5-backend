@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Trademark extends Model
 {
     use HasFactory;
+    protected $table = 'trademarks';
+
+    protected $fillable = [
+        'name'
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
 }

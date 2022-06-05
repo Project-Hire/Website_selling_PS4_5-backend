@@ -44,6 +44,7 @@ class AuthController extends Controller
             'gender' => 'required|boolean',
             'email' => 'required|string|email|max:100',
             'password' => 'required|string|min:6',
+            'role' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -175,7 +176,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => Carbon::parse(Carbon::now())->addSeconds(auth()->factory()->getTTL() * 60),
             'user' => auth()->user()
         ]);
     }

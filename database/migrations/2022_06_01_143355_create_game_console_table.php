@@ -15,6 +15,14 @@ class CreateGameConsoleTable extends Migration
     {
         Schema::create('game_console', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->bigInteger('trademark_id')->unsigned()->index();
+            $table->foreign('trademark_id')->references('id')->on('trademarks')->onDelete('cascade');
+            $table->bigInteger('quantity');
+            $table->integer('discount');
+            $table->integer('price');
+            $table->string('image', 1000);
+            $table->bigInteger('viewer');
             $table->timestamps();
         });
     }

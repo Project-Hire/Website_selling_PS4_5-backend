@@ -8,4 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Game_console extends Model
 {
     use HasFactory;
+    protected $table = 'game_console';
+
+    protected $fillable = [
+        'name', 'trademark_id', "quantity", "discount", "price", "image", "viewer"
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    public function trademark(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Trademark::class, "trademark_id");
+    }
 }
