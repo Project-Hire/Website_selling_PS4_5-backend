@@ -2,15 +2,24 @@
 
 namespace App\Services;
 use App\Models\Cd_game;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 
 class CDGameService{
     public function getAll($limit, $page, $keyword){
-        $data = DB::table('cd_games')
-            ->where('name', 'LIKE', "%{$keyword}%")
-            ->offset(($page - 1)*10)
+        $data = Cd_game::with(['trademark'])
+            ->whereIn('trademark_id', function (Builder $q) use ($keyword) {
+                $q->select('id')
+                    ->from('trademarks')
+                    ->where('name', 'like',"%{$keyword}%");
+            })
+            ->offset(($page - 1) * 10)
             ->paginate($limit);
 
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['trademark_id'] = $data[$i]->trademark;
+            unset($data[$i]['trademark_id']);
+        }
         return $data;
     }
 
@@ -40,7 +49,7 @@ class CDGameService{
         $description = $request->description;
         $trailer = $request->trailer;
 
-        $result = DB::update('update movies set name = ?, type_of_movie= ?, range_age= ?, dimension= ?, range_of_movie= ?, poster= ?, start_date= ?, actor= ?, director= ?, description= ?, trailer = ?  where id = ?', [$name,$type_movie, $range_age, $dimension, $range_of_movie,$poster, $start_date, $actor, $direct, $description, $trailer, $id]);
+        $result = DB::update('update cd_games set name = ?, type_of_movie= ?, range_age= ?, dimension= ?, range_of_movie= ?, poster= ?, start_date= ?, actor= ?, director= ?, description= ?, trailer = ?  where id = ?', [$name,$type_movie, $range_age, $dimension, $range_of_movie,$poster, $start_date, $actor, $direct, $description, $trailer, $id]);
 
         return $result;
     }
