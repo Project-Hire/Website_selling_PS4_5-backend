@@ -30,10 +30,33 @@ class AdvertisementController extends Controller
             }else{
                 return response()->json([
                     'status' => 0,
-                    'message' => 'You dont have movies'
+                    'message' => 'You dont have this advertisement'
                 ], 404);
             }
         }catch(\Exception $err){
+            return response()->json([
+                'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
+    public function detail($id) {
+        try {
+            $result = $this->advertisementService->getDetail($id);
+
+            if($result){
+                return response()->json([
+                    'status' => 1,
+                    'data' => $result
+                ], 201);
+            }else{
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'You dont this advertisement'
+                ], 404);
+            }
+        } catch (\Exception $err) {
             return response()->json([
                 'err' => $err,
                 'mess' => 'Something went wrong'
@@ -111,8 +134,9 @@ class AdvertisementController extends Controller
             $id = $request->id;
             $image = $request->image;
             $name = $request->name;
+            $updated_at = $request->updated_at;
 
-            $result = DB::update('update advertisement set image = ?, name = ? where id = ?', [$image, $name, $id]);
+            $result = DB::update('update advertisement set image = ?, name = ?, updated_at = ?  where id = ?', [$image, $name, $updated_at, $id]);
 
             if($result){
                 return response()->json([

@@ -49,8 +49,9 @@ Route::group([
 ], function ($router) {
     Route::get('/', [AdvertisementController::class, 'index']);
     Route::post('/store', [AdvertisementController::class, 'store']);
+    Route::get('/detail/{id}', [AdvertisementController::class, 'detail']);
     Route::post('/delete/{id}', [AdvertisementController::class, 'delete']);
-    Route::post('/update', [AdvertisementController::class, 'update']);
+    Route::put('/update', [AdvertisementController::class, 'update']);
 });
 
 Route::group([
@@ -58,7 +59,7 @@ Route::group([
     'prefix' => 'cd_games'
 ], function ($router) {
     Route::get('/', [CDGameController::class, 'index']);
-    Route::get('/detail', [CDGameController::class, 'detail']);
+    Route::get('/detail/{id}', [CDGameController::class, 'detail']);
     Route::post('/store', [CDGameController::class, 'store']);
     Route::post('/delete/{id}', [CDGameController::class, 'delete']);
     Route::post('/update', [CDGameController::class, 'update']);
