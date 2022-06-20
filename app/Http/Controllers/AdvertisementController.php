@@ -45,6 +45,8 @@ class AdvertisementController extends Controller
         try {
             $name = $request->name;
             $image = $request->image;
+            $created_at = $request->created_at;
+
 
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
@@ -54,9 +56,11 @@ class AdvertisementController extends Controller
             if($validator->fails()){
                 return response()->json($validator->errors()->toJson(), 400);
             }else{
-                $data = DB::table('advertisements')->insert([
+                $data = DB::table('advertisement')->insert([
                     'name' => $name,
                     'image' => $image,
+                    'created_at' => $created_at,
+                    'updated_at' => $created_at
                 ]);
 
                 if($data) {
@@ -108,7 +112,7 @@ class AdvertisementController extends Controller
             $image = $request->image;
             $name = $request->name;
 
-            $result = DB::update('update advertisements set image = ?, name = ? where id = ?', [$image, $name, $id]);
+            $result = DB::update('update advertisement set image = ?, name = ? where id = ?', [$image, $name, $id]);
 
             if($result){
                 return response()->json([
