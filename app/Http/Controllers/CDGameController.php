@@ -71,7 +71,7 @@ class CDGameController extends Controller
                     'trademark_id' => $trademark_id,
                     'quantity' => $quantity,
                     'discount' => $discount,
-                    '$price' => $price,
+                    'price' => $price,
                     'image' => $image,
                     'viewer' => $viewer,
                     'created_at' => $created_at,
@@ -154,7 +154,7 @@ class CDGameController extends Controller
             $price = $request->price;
             $image = $request->image;
 
-            $result = DB::update('update cd_games set name = ?, trademark_id= ?, quantity= ?, discount= ?, price= ?, image= ?where id = ?', [$name,$trademark_id, $quantity, $discount, $price,$image, $id]);
+            $result = DB::update('update cd_games set name = ?, trademark_id= ?, quantity= ?, discount= ?, price= ?, image= ? where id = ?', [$name,$trademark_id, $quantity, $discount, $price,$image, $id]);
 
             if($result){
                 return response()->json([

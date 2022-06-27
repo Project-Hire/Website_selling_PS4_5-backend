@@ -6,6 +6,7 @@ use \App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdvertisementController;
 use \App\Http\Controllers\VerificationController;
 use \App\Http\Controllers\CDGameController;
+use \App\Http\Controllers\TrademarkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,16 +40,6 @@ Route::group([
 ], function ($router) {
     Route::get('/', [AdvertisementController::class, 'index']);
     Route::post('/store', [AdvertisementController::class, 'store']);
-    Route::post('/delete/{id}', [AdvertisementController::class, 'delete']);
-    Route::post('/update', [AdvertisementController::class, 'update']);
-});
-
-Route::group([
-    'middleware' => 'api',
-    'prefix' => 'advertise'
-], function ($router) {
-    Route::get('/', [AdvertisementController::class, 'index']);
-    Route::post('/store', [AdvertisementController::class, 'store']);
     Route::get('/detail/{id}', [AdvertisementController::class, 'detail']);
     Route::post('/delete/{id}', [AdvertisementController::class, 'delete']);
     Route::put('/update', [AdvertisementController::class, 'update']);
@@ -63,5 +54,18 @@ Route::group([
     Route::post('/store', [CDGameController::class, 'store']);
     Route::post('/delete/{id}', [CDGameController::class, 'delete']);
     Route::post('/update', [CDGameController::class, 'update']);
+
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'trademarks'
+], function ($router) {
+    Route::get('/', [TrademarkController::class, 'index']);
+    Route::get('/detail/{id}', [TrademarkController::class, 'detail']);
+    Route::post('/store', [TrademarkController::class, 'store']);
+    Route::post('/delete/{id}', [TrademarkController::class, 'delete']);
+    Route::post('/update', [TrademarkController::class, 'update']);
+});
+
 
