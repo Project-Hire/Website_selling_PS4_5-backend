@@ -18,4 +18,14 @@ class Evaluation_GameConsole extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, "user_id");
+    }
+
+    public function gameConsole(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Game_console::class, "game_console_id");
+    }
 }

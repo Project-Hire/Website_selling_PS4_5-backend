@@ -8,7 +8,7 @@ class AdvertisementService{
     public function getAll($limit, $page, $keyword){
         $data = DB::table('advertisement')
             ->where('name', 'LIKE', "%{$keyword}%")
-            ->offset(($page - 1)*10)
+            ->offset(($page - 1) * 10)
             ->paginate($limit);
 
         return $data;

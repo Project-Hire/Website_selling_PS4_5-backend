@@ -18,4 +18,14 @@ class Evaluation_Cd extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, "user_id");
+    }
+
+    public function cdGame(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Cd_game::class, "cd_game_id");
+    }
 }

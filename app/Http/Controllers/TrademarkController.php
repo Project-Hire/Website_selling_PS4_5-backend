@@ -142,7 +142,7 @@ class TrademarkController extends Controller
                     'status' => 1,
                     'message' => 'Update successful'
                 ], 201);
-            }else{
+            } else{
                 return response()->json([
                     'status' => 0,
                     'message' => 'Update fail'

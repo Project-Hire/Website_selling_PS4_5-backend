@@ -18,4 +18,14 @@ class Evaluation_GiftCard extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, "user_id");
+    }
+
+    public function giftCard(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Gift_card::class, "gift_card_id");
+    }
 }

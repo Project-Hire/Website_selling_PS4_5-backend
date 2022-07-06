@@ -7,6 +7,8 @@ use App\Http\Controllers\AdvertisementController;
 use \App\Http\Controllers\VerificationController;
 use \App\Http\Controllers\CDGameController;
 use \App\Http\Controllers\TrademarkController;
+use \App\Http\Controllers\GameConsoleController;
+use \App\Http\Controllers\GiftCardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +68,28 @@ Route::group([
     Route::post('/store', [TrademarkController::class, 'store']);
     Route::post('/delete/{id}', [TrademarkController::class, 'delete']);
     Route::post('/update', [TrademarkController::class, 'update']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'game_consoles'
+], function ($router) {
+    Route::get('/', [GameConsoleController::class, 'index']);
+    Route::get('/detail/{id}', [GameConsoleController::class, 'detail']);
+    Route::post('/store', [GameConsoleController::class, 'store']);
+    Route::post('/delete/{id}', [GameConsoleController::class, 'delete']);
+    Route::post('/update', [GameConsoleController::class, 'update']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'gift_card'
+], function ($router) {
+    Route::get('/', [GiftCardController::class, 'index']);
+    Route::get('/detail/{id}', [GiftCardController::class, 'detail']);
+    Route::post('/store', [GiftCardController::class, 'store']);
+    Route::post('/delete/{id}', [GiftCardController::class, 'delete']);
+    Route::post('/update', [GiftCardController::class, 'update']);
 });
 
 

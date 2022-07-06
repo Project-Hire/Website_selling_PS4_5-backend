@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Services;
-use App\Models\Cd_game;
+
+use App\Models\Accessory;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 
-class CDGameService{
+class AccessoryService
+{
     public function getAll($limit, $page, $keyword){
-        $data = Cd_game::with(['trademark'])
+        $data = Accessory::with(['trademark'])
             ->whereIn('trademark_id', function (Builder $q) use ($keyword) {
                 $q->select('id')
                     ->from('trademarks')
@@ -17,14 +19,14 @@ class CDGameService{
             ->paginate($limit);
 
         for ($i = 0; $i < count($data); $i++) {
-            $data[$i]['trademark'] = $data[$i]->trademark;
+            $data[$i]['trademark_id'] = $data[$i]->trademark;
             unset($data[$i]['trademark_id']);
         }
         return $data;
     }
 
     public function getDetail($id){
-        $data = Cd_game::find($id);
+        $data = Accessory::find($id);
 
         return $data;
     }
