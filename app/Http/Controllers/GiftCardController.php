@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\GiftCardService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class GiftCardController extends Controller
 {
