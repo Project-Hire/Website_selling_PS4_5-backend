@@ -133,7 +133,7 @@ class GameConsoleController extends Controller
             }else{
                 return response()->json([
                     'status' => 0,
-                    'message' => 'You dont have cd game'
+                    'message' => 'You dont have any game console'
                 ], 404);
             }
         }catch (\Exception $err){

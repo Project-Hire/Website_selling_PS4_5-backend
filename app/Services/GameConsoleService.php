@@ -32,7 +32,7 @@ class GameConsoleService
     }
 
     public function delete($id){
-        $result = DB::table('cd_games')->delete($id);
+        $result = DB::table('game_console')->delete($id);
 
         return $result;
     }

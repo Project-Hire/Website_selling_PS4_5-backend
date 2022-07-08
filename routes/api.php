@@ -1,14 +1,13 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdvertisementController;
-use \App\Http\Controllers\VerificationController;
-use \App\Http\Controllers\CDGameController;
-use \App\Http\Controllers\TrademarkController;
-use \App\Http\Controllers\GameConsoleController;
-use \App\Http\Controllers\GiftCardController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CDGameController;
+use App\Http\Controllers\GameConsoleController;
+use App\Http\Controllers\GiftCardController;
+use App\Http\Controllers\TrademarkController;
+use App\Http\Controllers\VerificationController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
