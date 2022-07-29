@@ -135,7 +135,7 @@ class TrademarkController extends Controller
             $image = $request->image;
             $updated_at = $request->updated_at;
 
-            $result = DB::update('update advertisement set image = ?, name = ?, updated_at = ?  where id = ?', [$image, $name, $updated_at, $id]);
+            $result = DB::update('update trademarks set image = ?, name = ?, updated_at = ?  where id = ?', [$image, $name, $updated_at, $id]);
 
             if($result){
                 return response()->json([
