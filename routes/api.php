@@ -7,8 +7,8 @@ use App\Http\Controllers\GameConsoleController;
 use App\Http\Controllers\GiftCardController;
 use App\Http\Controllers\TrademarkController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\AccessoryController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -89,6 +89,17 @@ Route::group([
     Route::post('/store', [GiftCardController::class, 'store']);
     Route::post('/delete/{id}', [GiftCardController::class, 'delete']);
     Route::post('/update', [GiftCardController::class, 'update']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'accessory'
+], function ($router) {
+    Route::get('/', [AccessoryController::class, 'index']);
+    Route::get('/detail/{id}', [AccessoryController::class, 'detail']);
+    Route::post('/store', [AccessoryController::class, 'store']);
+    Route::post('/delete/{id}', [AccessoryController::class, 'delete']);
+    Route::post('/update', [AccessoryController::class, 'update']);
 });
 
 
