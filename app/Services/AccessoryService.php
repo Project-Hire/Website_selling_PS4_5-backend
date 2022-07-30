@@ -32,7 +32,7 @@ class AccessoryService
     }
 
     public function delete($id){
-        $result = DB::table('cd_games')->delete($id);
+        $result = DB::table('accessory')->delete($id);
 
         return $result;
     }

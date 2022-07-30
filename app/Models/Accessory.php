@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Accessory extends Model
 {
     use HasFactory;
-    protected $table = 'cd_games';
+    protected $table = 'accessory';
 
     protected $fillable = [
         'name', 'trademark_id', "quantity", "discount", "price", "image", "viewer"
