@@ -13,6 +13,7 @@ class CDGameService{
                     ->from('trademarks')
                     ->where('name', 'like',"%{$keyword}%");
             })
+            ->where('name', 'LIKE', "%{$keyword}%")
             ->offset(($page - 1) * 10)
             ->paginate($limit);
 
