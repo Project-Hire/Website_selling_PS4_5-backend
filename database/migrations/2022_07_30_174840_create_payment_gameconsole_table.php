@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEvaluationCdTable extends Migration
+class CreatePaymentGameconsoleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateEvaluationCdTable extends Migration
      */
     public function up()
     {
-        Schema::create('evaluation_cd', function (Blueprint $table) {
+        Schema::create('payment_gameconsole', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('game_console_id')->unsigned()->index();
+            $table->foreign('game_console_id')->references('id')->on('game_console')->onDelete('cascade');
             $table->bigInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('comment', 2000);
-            $table->integer('stars');
-            $table->bigInteger('cd_game_id')->unsigned()->index();
-            $table->foreign('cd_game_id')->references('id')->on('cd_games')->onDelete('cascade');
+            $table->integer('money');
+            $table->string('email');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateEvaluationCdTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('evaluation_cd');
+        Schema::dropIfExists('payment_gameconsole');
     }
 }

@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
-use App\Models\Evaluation_Accessory;
+use App\Models\PaymentAccessory;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 
-class EvaluationAccessoryService
+class PaymentAccessoryService
 {
     public function getAll($limit, $page, $keyword){
-        $data = Evaluation_Accessory::with(['user', 'accessory'])
+        $data = PaymentAccessory::with(['user', 'accessory'])
             ->whereIn('user_id', function (Builder $q) use ($keyword) {
                 $q->select('id')
                     ->from('users')
@@ -29,13 +29,13 @@ class EvaluationAccessoryService
     }
 
     public function getDetail($id){
-        $data = Evaluation_Accessory::find($id);
+        $data = PaymentAccessory::find($id);
 
         return $data;
     }
 
     public function delete($id){
-        $result = DB::table('evaluation_accessory')->delete($id);
+        $result = DB::table('payment_accessory')->delete($id);
 
         return $result;
     }

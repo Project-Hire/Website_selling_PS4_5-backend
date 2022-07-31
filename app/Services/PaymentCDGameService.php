@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
-use App\Models\Evaluation_Accessory;
+use App\Models\PaymentCDGame;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 
-class EvaluationAccessoryService
+class PaymentCDGameService
 {
     public function getAll($limit, $page, $keyword){
-        $data = Evaluation_Accessory::with(['user', 'accessory'])
+        $data = PaymentCDGame::with(['user', 'cd_game'])
             ->whereIn('user_id', function (Builder $q) use ($keyword) {
                 $q->select('id')
                     ->from('users')
@@ -20,8 +20,8 @@ class EvaluationAccessoryService
 
         for ($i = 0; $i < count($data); $i++) {
             $data[$i]['user'] = $data[$i]->user;
-            $data[$i]['accessory'] = $data[$i]->accessory;
-            unset($data[$i]['accessory_id']);
+            $data[$i]['cd_game'] = $data[$i]->cdGame;
+            unset($data[$i]['cd_game_id']);
             unset($data[$i]['user_id']);
         }
 
@@ -29,13 +29,13 @@ class EvaluationAccessoryService
     }
 
     public function getDetail($id){
-        $data = Evaluation_Accessory::find($id);
+        $data = PaymentCDGame::find($id);
 
         return $data;
     }
 
     public function delete($id){
-        $result = DB::table('evaluation_accessory')->delete($id);
+        $result = DB::table('payment_cd_games')->delete($id);
 
         return $result;
     }

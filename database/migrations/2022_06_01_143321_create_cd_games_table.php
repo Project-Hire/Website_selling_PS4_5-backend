@@ -14,7 +14,7 @@ class CreateCdGamesTable extends Migration
     public function up()
     {
         Schema::create('cd_games', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('name');
             $table->bigInteger('trademark_id')->unsigned()->index();
             $table->foreign('trademark_id')->references('id')->on('trademarks')->onDelete('cascade');

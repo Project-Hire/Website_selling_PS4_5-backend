@@ -14,7 +14,7 @@ class CreateEvaluationGameconsoleTable extends Migration
     public function up()
     {
         Schema::create('evaluation_gameconsole', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('comment', 2000);
