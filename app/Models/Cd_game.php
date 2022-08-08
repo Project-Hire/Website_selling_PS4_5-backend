@@ -11,7 +11,7 @@ class Cd_game extends Model
     protected $table = 'cd_games';
 
     protected $fillable = [
-        'name', 'trademark_id', "quantity", "discount", "price", "image", "viewer"
+        'name', 'trademark_id', "description", "quantity", "discount", "price", "image", "viewer"
     ];
 
     protected $casts = [

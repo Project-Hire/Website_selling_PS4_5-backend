@@ -49,6 +49,7 @@ class AccessoryController extends Controller
             $quantity = $request->quantity;
             $discount = $request->discount;
             $price = $request->price;
+            $description = $request->description;
             $image = $request->image;
             $created_at = $request->created_at;
             $updated_at = $request->updated_at;
@@ -58,6 +59,7 @@ class AccessoryController extends Controller
                 'name' => 'required',
                 'trademark_id' => 'required',
                 'quantity' => 'required',
+                'description' => 'required',
                 'discount' => 'required',
                 'price' => 'required',
                 'image' => 'required',
@@ -71,6 +73,7 @@ class AccessoryController extends Controller
                     'trademark_id' => $trademark_id,
                     'quantity' => $quantity,
                     'discount' => $discount,
+                    'description' => $description,
                     'price' => $price,
                     'image' => $image,
                     'viewer' => $viewer,
@@ -150,11 +153,12 @@ class AccessoryController extends Controller
             $name = $request->name;
             $trademark_id = $request->trademark_id;
             $quantity = $request->quantity;
+            $description = $request->description;
             $discount = $request->discount;
             $price = $request->price;
             $image = $request->image;
 
-            $result = DB::update('update accessory set name = ?, trademark_id= ?, quantity= ?, discount= ?, price= ?, image= ? where id = ?', [$name,$trademark_id, $quantity, $discount, $price,$image, $id]);
+            $result = DB::update('update accessory set name = ?, description =?, trademark_id= ?, quantity= ?, discount= ?, price= ?, image= ? where id = ?', [$name, $description, $trademark_id, $quantity, $discount, $price,$image, $id]);
 
             if($result){
                 return response()->json([

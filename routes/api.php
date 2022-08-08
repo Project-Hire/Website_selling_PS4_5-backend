@@ -8,6 +8,8 @@ use App\Http\Controllers\GiftCardController;
 use App\Http\Controllers\TrademarkController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\AccessoryController;
+use App\Http\Controllers\PaymentAccessoryController;
+
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -102,4 +104,12 @@ Route::group([
     Route::post('/update', [AccessoryController::class, 'update']);
 });
 
-
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'payment_accessory'
+], function ($router) {
+    Route::get('/', [PaymentAccessoryController::class, 'index']);
+    Route::get('/detail/{id}', [PaymentAccessoryController::class, 'detail']);
+    Route::post('/store', [PaymentAccessoryController::class, 'store']);
+    Route::post('/delete/{id}', [PaymentAccessoryController::class, 'delete']);
+});

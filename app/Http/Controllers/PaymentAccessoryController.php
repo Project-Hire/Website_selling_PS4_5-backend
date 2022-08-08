@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PaymentAccessoryVerification;
+use App\Models\PaymentAccessory;
 use App\Services\PaymentAccessoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 
 class PaymentAccessoryController extends Controller
 {
     private $paymentAccessoryService;
     public function __construct(PaymentAccessoryService $paymentAccessoryService) {
-        $this->middleware('auth:api', ['except' => ['index', 'detail']]);
+        $this->middleware('auth:api', ['except' => ['index', 'detail', 'store']]);
         $this->paymentAccessoryService = $paymentAccessoryService;
     }
 
@@ -43,13 +46,10 @@ class PaymentAccessoryController extends Controller
     }
 
     public function store(Request $request) {
-        try {
-            $accessory_id = $request->accessory_id;
-            $user_id = $request->user_id;
+//        try {
             $email = $request->email;
-            $money = $request->money;
             $created_at = $request->created_at;
-            $updated_at = $request->updated_at;
+            $updated_at = $request->created_at;
 
             $validator = Validator::make($request->all(), [
                 'accessory_id' => 'required',
@@ -61,15 +61,22 @@ class PaymentAccessoryController extends Controller
             if($validator->fails()) {
                 return response()->json($validator->errors()->toJson(), 400);
             } else{
-                $data = DB::table('payment_accessory')->insert([
-                    'accessory_id' => $accessory_id,
-                    'email' => $email,
-                    'user_id' => $user_id,
-                    'money' => $money,
+                $data = PaymentAccessory::create(array_merge(
+                    $validator->validated()
+                ), [
                     'created_at' => $created_at,
-                    'updated_at' => $updated_at,
+                    'updated_at' => $updated_at
                 ]);
+//                $data = DB::table('payment_accessory')->insert([
+//                    'accessory_id' => $accessory_id,
+//                    'email' => $email,
+//                    'user_id' => $user_id,
+//                    'money' => $money,
+//                    'created_at' => $created_at,
+//                    'updated_at' => $updated_at,
+//                ]);
 
+                Mail::to($data->email)->send(new PaymentAccessoryVerification($data));
                 if($data){
                     return response()->json([
                         'status' => 1,
@@ -82,12 +89,13 @@ class PaymentAccessoryController extends Controller
                     ], 404);
                 }
             }
-        }catch(\Exception $err){
-            return response()->json([
-                'err' => $err,
-                'mess' => 'Something went wrong'
-            ], 500);
-        }
+//        }
+//        catch(\Exception $err){
+//            return response()->json([
+//                'err' => $err,
+//                'mess' => 'Something went wrong'
+//            ], 500);
+//        }
     }
 
     public function detail($id){

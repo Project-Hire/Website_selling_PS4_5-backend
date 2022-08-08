@@ -11,7 +11,7 @@ class Game_console extends Model
     protected $table = 'game_console';
 
     protected $fillable = [
-        'name', 'trademark_id', "quantity", "discount", "price", "image", "viewer"
+        'name', 'trademark_id', "description", "quantity", "discount", "price", "image", "viewer"
     ];
 
     protected $casts = [

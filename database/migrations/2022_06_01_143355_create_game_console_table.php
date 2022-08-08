@@ -22,6 +22,7 @@ class CreateGameConsoleTable extends Migration
             $table->integer('discount');
             $table->integer('price');
             $table->string('image', 1000);
+            $table->string('description', 10000);
             $table->bigInteger('viewer');
             $table->timestamps();
         });

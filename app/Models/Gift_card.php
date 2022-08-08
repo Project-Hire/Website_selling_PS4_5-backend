@@ -11,7 +11,7 @@ class Gift_card extends Model
     protected $table = 'gift_card';
 
     protected $fillable = [
-        'name', 'trademark_id', "quantity", "discount", "price", "image", "viewer"
+        'name', 'trademark_id', "description", "quantity", "discount", "price", "image", "viewer"
     ];
 
     protected $casts = [
