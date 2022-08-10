@@ -49,6 +49,7 @@ class GameConsoleController extends Controller
             $quantity = $request->quantity;
             $discount = $request->discount;
             $price = $request->price;
+            $description = $request->description;
             $image = $request->image;
             $created_at = $request->created_at;
             $updated_at = $request->updated_at;
@@ -57,6 +58,7 @@ class GameConsoleController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'trademark_id' => 'required',
+                'description' => 'required',
                 'quantity' => 'required',
                 'discount' => 'required',
                 'price' => 'required',
@@ -71,6 +73,7 @@ class GameConsoleController extends Controller
                     'trademark_id' => $trademark_id,
                     'quantity' => $quantity,
                     'discount' => $discount,
+                    'description' => $description,
                     'price' => $price,
                     'image' => $image,
                     'viewer' => $viewer,
@@ -150,11 +153,12 @@ class GameConsoleController extends Controller
             $name = $request->name;
             $trademark_id = $request->trademark_id;
             $quantity = $request->quantity;
+            $description = $request->description;
             $discount = $request->discount;
             $price = $request->price;
             $image = $request->image;
 
-            $result = DB::update('update game_console set name = ?, trademark_id= ?, quantity= ?, discount= ?, price= ?, image= ? where id = ?', [$name,$trademark_id, $quantity, $discount, $price,$image, $id]);
+            $result = DB::update('update game_console set name = ?, description = ?, trademark_id= ?, quantity= ?, discount= ?, price= ?, image= ? where id = ?', [$name, $description, $trademark_id, $quantity, $discount, $price,$image, $id]);
 
             if($result){
                 return response()->json([
