@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class PaymentCDGameService
 {
     public function getAll($limit, $page, $keyword){
-        $data = PaymentCDGame::with(['user', 'cd_game'])
+        $data = PaymentCDGame::with(['user', 'cdGame'])
             ->whereIn('user_id', function (Builder $q) use ($keyword) {
                 $q->select('id')
                     ->from('users')

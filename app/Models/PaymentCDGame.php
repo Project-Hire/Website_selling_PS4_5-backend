@@ -22,7 +22,7 @@ class PaymentCDGame extends Model
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(User::class, "users_id");
+        return $this->belongsTo(User::class, "user_id");
     }
 
     public function cdGame(): \Illuminate\Database\Eloquent\Relations\BelongsTo

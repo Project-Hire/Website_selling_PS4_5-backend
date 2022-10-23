@@ -13,7 +13,7 @@ class PaymentCDGameController extends Controller
 {
     private $paymentCDGameService;
     public function __construct(PaymentCDGameService $paymentCDGameService) {
-        $this->middleware('auth:api', ['except' => ['index', 'detail', 'store']]);
+        $this->middleware('auth:api', ['except' => ['index', 'detail', 'store', 'paymentByUserID']]);
         $this->paymentCDGameService = $paymentCDGameService;
     }
 
@@ -39,6 +39,41 @@ class PaymentCDGameController extends Controller
         }catch(\Exception $err){
             return response()->json([
                 'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
+    public function paymentByUserID(Request $request) {
+        try {
+            $user_id = $request->user_id;
+            $limit = $request->limit;
+            $page = $request->page;
+
+            $data = PaymentCDGame::with(['user', 'cdGame'])->where('user_id', 'LIKE', $user_id)->offset(($page - 1)*10)
+                ->paginate($limit);
+
+            for ($i = 0; $i < count($data); $i++) {
+                $data[$i]['user'] = $data[$i]->user;
+                $data[$i]['cd_game'] = $data[$i]->cdGame;
+                unset($data[$i]['cd_games_id']);
+                unset($data[$i]['user_id']);
+            }
+
+            if($data) {
+                return response()->json([
+                    'status' => 1,
+                    'data' => $data
+                ], 201);
+            } else {
+                return response()->json([
+                    'status' => 1,
+                    'message' => 'You dont have ticket'
+                ], 201);
+            }
+        } catch (\Exception $exception) {
+            return response()->json([
+                'err' => $exception,
                 'mess' => 'Something went wrong'
             ], 500);
         }

@@ -32,6 +32,8 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
+    Route::post('/update_profile', [AuthController::class, 'updateProfile']);
+    Route::post('/change_password', [AuthController::class, 'changePassword']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/re_register', [AuthController::class, 're_register']);
 
@@ -124,6 +126,7 @@ Route::group([
     Route::get('/detail/{id}', [PaymentCDGameController::class, 'detail']);
     Route::post('/store', [PaymentCDGameController::class, 'store']);
     Route::post('/delete/{id}', [PaymentCDGameController::class, 'delete']);
+    Route::get('/history', [PaymentCDGameController::class, 'paymentByUserID']);
 });
 
 Route::group([

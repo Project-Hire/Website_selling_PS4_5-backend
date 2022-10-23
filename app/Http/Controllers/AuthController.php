@@ -6,6 +6,7 @@ use App\Mail\UserVerification;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Validator;
 
@@ -125,6 +126,73 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Failed to re_register',
         ], 500);
+    }
+
+    public function changePassword(Request $request) {
+        try {
+            $id = $request->user_id;
+            $password = $request->password;
+
+            $result = DB::update('update users set password = ? where id = ?', [bcrypt($password), $id]);
+
+            if($result){
+                return response()->json([
+                    'status' => 1,
+                    'message' => 'Update password successful! Please login again'
+                ], 201);
+            }else{
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'Update password fail'
+                ], 404);
+            }
+        } catch (\Exception $err) {
+            return response()->json([
+                'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
+    public function updateProfile(Request $request) {
+        try {
+            $id = $request->user_id;
+            $full_name = $request->full_name;
+            $number_phone = $request->number_phone;
+            $address = $request->address;
+            $birth = $request->birth;
+            $gender = $request->gender;
+
+            $validator = Validator::make($request->all(), [
+                'full_name' => 'required|string|between:2,100',
+                'number_phone' => 'string|between:10,20',
+                'address' => 'required',
+                'birth' => 'required|string|between:10,20',
+                'gender' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return response()->json($validator->errors()->toJson(), 400);
+            } else {
+                $result = DB::update('update users set full_name = ?, number_phone= ?, address= ?, birth= ?, gender= ? where id = ?', [$full_name, $number_phone, $address, $birth, $gender, $id]);
+
+                if($result){
+                    return response()->json([
+                        'status' => 1,
+                        'message' => 'Update successful'
+                    ], 201);
+                }else{
+                    return response()->json([
+                        'status' => 0,
+                        'message' => 'Update fail'
+                    ], 404);
+                }
+            }
+        } catch (\Exception $err) {
+            return response()->json([
+                'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
     }
 
     /**
