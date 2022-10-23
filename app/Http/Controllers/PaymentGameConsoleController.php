@@ -54,6 +54,7 @@ class PaymentGameConsoleController extends Controller
             $validator = Validator::make($request->all(), [
                 'game_console_id' => 'required',
                 'user_id' => 'required',
+                'quantity' => 'required',
                 'email' => 'required',
                 'money' => 'required',
             ]);

@@ -55,6 +55,7 @@ class PaymentAccessoryController extends Controller
                 'accessory_id' => 'required',
                 'user_id' => 'required',
                 'email' => 'required',
+                'quantity' => 'required',
                 'money' => 'required',
             ]);
 

@@ -12,7 +12,7 @@ class PaymentGiftCard extends Model
     protected $table = 'payment_giftcard';
 
     protected $fillable = [
-        "gift_card_id", "user_id", "money", "email"
+        "gift_card_id", "user_id", "money", "email", 'quantity'
     ];
 
     protected $casts = [

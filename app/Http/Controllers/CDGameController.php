@@ -11,7 +11,7 @@ class CDGameController extends Controller
 {
     private $cdGameService;
     public function __construct(CDGameService $cdGameService) {
-        $this->middleware('auth:api', ['except' => ['index', 'detail']]);
+        $this->middleware('auth:api', ['except' => ['index', 'detail', 'store']]);
         $this->cdGameService = $cdGameService;
     }
 

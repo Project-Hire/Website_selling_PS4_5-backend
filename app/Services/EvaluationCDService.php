@@ -29,13 +29,13 @@ class EvaluationCDService
     }
 
     public function getDetail($id){
-        $data = Accessory::find($id);
+        $data = Evaluation_Cd::find($id);
 
         return $data;
     }
 
     public function delete($id){
-        $result = DB::table('evaluation_accessory')->delete($id);
+        $result = DB::table('evaluation_cd')->delete($id);
 
         return $result;
     }

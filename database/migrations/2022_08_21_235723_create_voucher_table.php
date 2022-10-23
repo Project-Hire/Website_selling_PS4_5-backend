@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentCdGamesTable extends Migration
+class CreateVoucherTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreatePaymentCdGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_cd_games', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('cd_games_id')->unsigned()->index();
-            $table->foreign('cd_games_id')->references('id')->on('cd_games')->onDelete('cascade');
+        Schema::create('vouchers', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
             $table->bigInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('money');
+            $table->integer('discount');
             $table->integer('quantity');
-            $table->string('email');
+            $table->dateTime('expired_at');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ class CreatePaymentCdGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_cd_games');
+        Schema::dropIfExists('voucher');
     }
 }

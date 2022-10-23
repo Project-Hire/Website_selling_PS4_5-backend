@@ -54,6 +54,7 @@ class PaymentGiftCardController extends Controller
             $validator = Validator::make($request->all(), [
                 'gift_card_id' => 'required',
                 'user_id' => 'required',
+                'quantity' => 'required',
                 'email' => 'required',
                 'money' => 'required',
             ]);

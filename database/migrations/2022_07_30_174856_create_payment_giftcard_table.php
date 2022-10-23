@@ -20,6 +20,7 @@ class CreatePaymentGiftcardTable extends Migration
             $table->bigInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('money');
+            $table->integer('quantity');
             $table->string('email');
             $table->timestamps();
         });

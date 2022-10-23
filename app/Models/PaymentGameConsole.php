@@ -12,7 +12,7 @@ class PaymentGameConsole extends Model
     protected $table = 'payment_gameconsole';
 
     protected $fillable = [
-        "game_console_id", "user_id", "money", "email"
+        "game_console_id", "user_id", "money", "email", 'quantity'
     ];
 
     protected $casts = [

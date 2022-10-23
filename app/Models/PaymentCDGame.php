@@ -12,7 +12,7 @@ class PaymentCDGame extends Model
     protected $table = 'payment_cd_games';
 
     protected $fillable = [
-        "cd_games_id", "user_id", "money", "email"
+        "cd_games_id", "user_id", "money", "email", 'quantity'
     ];
 
     protected $casts = [
@@ -22,7 +22,7 @@ class PaymentCDGame extends Model
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(User::class, "user_id");
+        return $this->belongsTo(User::class, "users_id");
     }
 
     public function cdGame(): \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -9,6 +9,8 @@ use App\Http\Controllers\TrademarkController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\AccessoryController;
 use App\Http\Controllers\PaymentAccessoryController;
+use App\Http\Controllers\PaymentCDGameController;
+use App\Http\Controllers\VoucherController;
 
 use Illuminate\Support\Facades\Route;
 /*
@@ -112,4 +114,22 @@ Route::group([
     Route::get('/detail/{id}', [PaymentAccessoryController::class, 'detail']);
     Route::post('/store', [PaymentAccessoryController::class, 'store']);
     Route::post('/delete/{id}', [PaymentAccessoryController::class, 'delete']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'payment_cdGame'
+], function ($router) {
+    Route::get('/', [PaymentCDGameController::class, 'index']);
+    Route::get('/detail/{id}', [PaymentCDGameController::class, 'detail']);
+    Route::post('/store', [PaymentCDGameController::class, 'store']);
+    Route::post('/delete/{id}', [PaymentCDGameController::class, 'delete']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'voucher'
+], function ($router) {
+    Route::get('/', [VoucherController::class, 'index']);
+    Route::post('/get-voucher', [VoucherController::class, 'getVoucherDiscount']);
 });

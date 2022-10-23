@@ -1,4 +1,4 @@
-@component('mail::message')
+@component('mail::message')#
 # Thais shop
 
 <div style="font-size: 22px; font-weight: bold">Thông tin khách hàng: </div>
@@ -7,10 +7,10 @@ Số điện thoại: {{$user->number_phone}}<br>
 Address: {{$user->address}}<br>
 
 <div style="font-size: 22px; font-weight: bold; margin-top: 20px">Thông tin sản phẩm: </div>
-ID sản phẩm: {{$accessory->id}}<br>
-Tên sản phẩm: {{$accessory->name}}<br>
+ID sản phẩm: {{$cdGame->id}}<br>
+Tên sản phẩm: {{$cdGame->name}}<br>
 Giá tiền: {{$payment}}<br>
-<img src={{$accessory->image}} alt={{$accessory->name}}>
+<img src={{$cdGame->image}} alt={{$cdGame->name}}>
 
 
 Thanks,<br>

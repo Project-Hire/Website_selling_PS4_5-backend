@@ -13,7 +13,7 @@ class PaymentCDGameService
             ->whereIn('user_id', function (Builder $q) use ($keyword) {
                 $q->select('id')
                     ->from('users')
-                    ->where('name', 'like',"%{$keyword}%");
+                    ->where('full_name', 'like',"%{$keyword}%");
             })
             ->offset(($page - 1) * 10)
             ->paginate($limit);
@@ -21,7 +21,7 @@ class PaymentCDGameService
         for ($i = 0; $i < count($data); $i++) {
             $data[$i]['user'] = $data[$i]->user;
             $data[$i]['cd_game'] = $data[$i]->cdGame;
-            unset($data[$i]['cd_game_id']);
+            unset($data[$i]['cd_games_id']);
             unset($data[$i]['user_id']);
         }
 

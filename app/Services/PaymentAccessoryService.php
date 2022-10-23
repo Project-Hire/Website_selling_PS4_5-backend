@@ -13,7 +13,7 @@ class PaymentAccessoryService
             ->whereIn('user_id', function (Builder $q) use ($keyword) {
                 $q->select('id')
                     ->from('users')
-                    ->where('name', 'like',"%{$keyword}%");
+                    ->where('full_name', 'like',"%{$keyword}%");
             })
             ->offset(($page - 1) * 10)
             ->paginate($limit);

@@ -12,7 +12,7 @@ class PaymentAccessory extends Model
     protected $table = 'payment_accessory';
 
     protected $fillable = [
-        "accessory_id", "user_id", "money", "email"
+        "accessory_id", "user_id", "money", "email", 'quantity'
     ];
 
     protected $casts = [
